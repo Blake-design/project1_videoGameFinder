@@ -1,1 +1,135 @@
-/*# sourceMappingURL=main.css.map */
+:root {
+  --lowerThird: #42d1ed;
+  --game: #42edb4;
+  --finder: #42d1ed;
+  --bg: #313131;
+  --textcolor: whitesmoke;
+  --textcolor2: #bdbdbd;
+  --dangeroustext: #fada7a;
+}
+
+body {
+  background-color: var(--bg);
+}
+
+.photo-box,
+.text-box {
+  overflow: hidden;
+  position: relative;
+  height: 250px;
+  text-align: center;
+}
+
+.photo-box img {
+  max-width: 100%;
+  height: auto;
+  min-height: 250px;
+}
+
+.photo-box aside {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  padding: 1em 0.5em;
+  width: 100%;
+  font-size: 80%;
+  text-align: right;
+  background: -moz-linear-gradient(
+    top,
+    rgba(16, 27, 30, 0) 0%,
+    rgb(66, 209, 237) 90%
+  ); /* FF3.6+ */
+  background: -webkit-gradient(
+    linear,
+    left top,
+    left bottom,
+    color-stop(0%, rgba(16, 27, 30, 0)),
+    color-stop(90%, rgba(66, 209, 237))
+  ); /* Chrome,Safari4+ */
+  background: -webkit-linear-gradient(
+    top,
+    rgba(16, 27, 30, 0) 0%,
+    rgba(66, 209, 237) 90%
+  ); /* Chrome10+,Safari5.1+ */
+  background: -o-linear-gradient(
+    top,
+    rgba(16, 27, 30, 0) 0%,
+    rgba(66, 209, 237) 90%
+  ); /* Opera 11.10+ */
+  background: -ms-linear-gradient(
+    top,
+    rgba(16, 27, 30, 0) 0%,
+    rgba(66, 209, 237) 90%
+  ); /* IE10+ */
+  background: linear-gradient(
+    to bottom,
+    rgba(16, 27, 30, 0) 0%,
+    rgba(66, 209, 237) 90%
+  ); /* W3C */
+  filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00101b1e', endColorstr='#0c0202',GradientType=0 ); /* IE6-9 */
+}
+
+.photo-box aside span {
+  color: var(--textcolor2);
+  font-family: "STIX Two Math", serif;
+  text-align: left;
+}
+
+.photo-box aside span a {
+  color: var(--textcolor);
+  text-decoration: none;
+}
+
+.text-box {
+  background: var(--bg);
+  color: var(--textcolor);
+}
+
+.text-box-head {
+  color: var(--textcolor);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-family: "Black Han Sans", sans-serif;
+}
+#game {
+  color: var(--game);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-family: "Black Han Sans", sans-serif;
+}
+
+.text-box-head span {
+  position: relative;
+
+  color: var(--finder);
+  font-weight: 400;
+  text-transform: uppercase;
+  font-size: 3rem;
+  font-family: "Black Han Sans", sans-serif;
+}
+
+.text-box-subhead {
+  font-family: "STIX Two Math", serif;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-left: 2%;
+  padding-right: 2%;
+}
+.text-box-subhead span {
+  font-family: monospace;
+  font-weight: normal;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding-left: 2%;
+  padding-right: 2%;
+  font-size: 1rem;
+  color: var(--dangeroustext);
+}
+
+footer {
+  text-align: center;
+  color: var(--textcolor2);
+}
