@@ -13,6 +13,16 @@ fetch("https://api.rawg.io/api/platforms?key="+apiKey, {
 })
 .then(function (data) {
   console.log(data)
+  //Appending Images to tag/id
+  for (var i = 0; i < data.results.length; i++) {
+    console.log(data.results[i].image_background)
+    // var backgroundImage = document
+    // var issueTitle = document
+    // userName.textContent = data[i].user.login;
+    // issueTitle.textContent = data[i].title;
+    // issueContainer.append(userName);
+    // issueContainer.append(issueTitle);
+  }
 })
 .catch(err => {
 	console.error(err);
