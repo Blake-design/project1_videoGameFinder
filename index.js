@@ -13,29 +13,6 @@ fetch("https://api.rawg.io/api/games?key=" + apiKey, {
   })
   .then(function (data) {
     console.log(data);
-<<<<<<< Updated upstream
-  })
-  .catch((err) => {
-    console.error(err);
-  });
-
-// //Pictures
-// $( function() ,
-//     $( "#accordion" ).accordion();
-//   } );
-
-/// create a function that loops through first 5 results in api
-
-//// create a function that grabs the img element and replaces the content with screenshot from api
-
-/// create a function that grabs game titles from API
-
-/// create a pull down menu to pick genres
-
-/// set up click event that stores selction to local storage
-
-///set local storage to variable let that filter results
-=======
 
     game1 = {
       name: data.results[i].name,
@@ -75,4 +52,3 @@ fetch("https://api.rawg.io/api/games?key=" + apiKey, {
     $("#photo4").attr("src", game4.photo);
     $("#photo5").attr("src", game5.photo);
   });
->>>>>>> Stashed changes
