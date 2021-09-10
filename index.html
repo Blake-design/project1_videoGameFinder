@@ -24,9 +24,9 @@
   <body>
     <main class="pure-g">
       <article class="photo-box pure-u-2-5" 
-        <a href="http://www.dillonmcintosh.tumblr.com/">
+        <a href="#">
           <img class= "pure-img"
-            src="http://24.media.tumblr.com/d6b9403c704c3e5aa1725c106e8a9430/tumblr_mvyxd9PUpZ1st5lhmo1_1280.jpg"
+            src=""
             alt="Beach"
             id="photo1"
           />
@@ -92,11 +92,27 @@
         </aside>
       </article>
 
-      <nav class="text-box pure-u-1-5">
+      <!-- <nav class="text-box pure-u-1-5">
         Please select your favorite genre and we will suggest some popular
         titles.
         <button class="pure-button">Button</button>
-      </nav>
+      </nav> -->
+      <div class="selectGenre">
+ 
+        <form action="#">
+         
+          <fieldset>
+            <label for="genres"></label>
+
+            <select name="genre" id="genre1">
+              <option id="genre2"></option>
+              <option id="genre3"></option>
+              <option id="genre4"></option>
+              <option id="genre5"></option>
+            </select>
+            </fieldset>
+            </form>
+          </div>
 
       <article class="photo-box pure-u-2-5">
         <a href="http://www.flickr.com/photos/rulasibai/">
@@ -144,5 +160,6 @@
       <h2>Powered by RAWG API and Gameprices API</h2>
     </footer>
     <script src="./index.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   </body>
 </html>
