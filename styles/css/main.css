@@ -129,6 +129,17 @@ body {
   color: var(--dangeroustext);
 }
 
+fieldset {
+  border: none;
+}
+
+#genre1 {
+  position: relative;
+  left: 3rem;
+  width: 15rem;
+  height: 2.5rem;
+}
+
 footer {
   text-align: center;
   color: var(--textcolor2);

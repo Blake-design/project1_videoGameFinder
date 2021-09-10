@@ -2,9 +2,12 @@
 
 //API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
+var genreNames = [];
+
+function updateGenreName() {}
 
 //Fetch
-fetch("https://api.rawg.io/api/platforms?key=" + apiKey, {
+fetch("https://api.rawg.io/api/genres?key=" + apiKey, {
   method: "GET",
 })
   .then((response) => {
@@ -13,39 +16,100 @@ fetch("https://api.rawg.io/api/platforms?key=" + apiKey, {
   })
   .then(function (data) {
     console.log(data);
-    //Appending Images to tag/id
-    for (var i = 0; i < data.results.length; i++) {
-      console.log(data.results[i].image_background);
-      // var backgroundImage = document
-      // var issueTitle = document
-      // userName.textContent = data[i].user.login;
-      // issueTitle.textContent = data[i].title;
-      // issueContainer.append(userName);
-      // issueContainer.append(issueTitle);
-    }
+    var genreResults = data.results;
+    console.log(genreResults);
+    var getGenreName1 = data.results[1].name;
+    var getGenreName2 = data.results[2].name;
+    console.log(getGenreName1);
+    $("#genre2").text(getGenreName1);
+    $("#genre3").text(getGenreName2);
+
+    var game1 = data.results[1].games[0].id;
+    console.log(game1);
+    $("#photo1").text(game1);
+
+    genreResults.forEach((genre) => {
+      console.log(genre.name);
+      $("<button>")
+        .addClass("genreButton")
+        .text(genre.name)
+        .on("click", function (event) {
+          genreResults.forEach((genre) => {
+            if (event.target.textContent === genre.name) {
+              console.log(genre);
+            }
+          });
+        })
+        .appendTo($("body"));
+    });
+    $(document).click(
+      getGenreName1,
+      fetch(`https://api.rawg.io/api/games/${game1}?key=` + apiKey, {
+        method: "GET",
+      })
+        .then((response) => {
+          console.log(response);
+          return response.json();
+        })
+        .then(function (data) {
+          console.log(data);
+          var gameImage = data.background_image;
+          console.log(gameImage);
+          $("#photo1").attr("src", gameImage);
+
+          // for (var i = 0; i < data.results.length; i++) {
+          //   console.log(data.results[i].background_image);
+          // }
+        })
+        .catch((err) => {
+          console.error(err);
+        })
+    );
   })
+  // .then(function (data) {
+  //   console.log(data);
+  //   var genreResults = data.results;
+  //   console.log(genreResults);
+  //   genreResults.forEach((genre) => {
+  //     console.log(genre.name);
+  //     $("<button>")
+  //       .addClass("genreButton")
+  //       .text(genre.name)
+  //       .on("click", function (event) {
+  //         genreResults.forEach((genre) => {
+  //           if (event.target.textContent === genre.name) {
+  //             console.log(genre);
+  //           }
+  //         });
+  //       })
+  //       .appendTo($("body"));
+  //   });
+  // })
   .catch((err) => {
     console.error(err);
   });
-fetch("https://api.rawg.io/api/games?key=" + apiKey, {
-  method: "GET",
-})
-  .then((response) => {
-    console.log(response);
-    return response.json();
-  })
-  .then(function (data) {
-    console.log(data);
+// document.addEventListener.selectedGenre1(
+//   "click",
+//   fetch("https://api.rawg.io/api/games?key=" + apiKey, {
+//     method: "GET",
+//   })
+//     .then((response) => {
+//       console.log(response);
+//       return response.json();
+//     })
+//     .then(function (data) {
+//       console.log(data);
 
-    for (var i = 0; i < data.results.length; i++) {
-      console.log(data.results[i].background_image);
-    }
-  })
-  .catch((err) => {
-    console.error(err);
-  });
+//       // for (var i = 0; i < data.results.length; i++) {
+//       //   console.log(data.results[i].background_image);
+//       // }
+//     })
+//     .catch((err) => {
+//       console.error(err);
+//     })
+// );
 
-//Pictures
-$(function () {
-  $("#accordion").accordion();
-});
+// //Pictures
+// $(function () {
+//   $("#accordion").accordion();
+// });
