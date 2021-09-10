@@ -1,13 +1,9 @@
 //Accordion Script(<script src="https://code.jquery.com/jquery-1.12.4.js"></script> <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>)
 
-//API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
-var genreNames = [];
-
-function updateGenreName() {}
 
 //Fetch
-fetch("https://api.rawg.io/api/genres?key=" + apiKey, {
+fetch("https://api.rawg.io/api/games?key=" + apiKey, {
   method: "GET",
 })
   .then((response) => {
@@ -16,100 +12,42 @@ fetch("https://api.rawg.io/api/genres?key=" + apiKey, {
   })
   .then(function (data) {
     console.log(data);
-    var genreResults = data.results;
-    console.log(genreResults);
-    var getGenreName1 = data.results[1].name;
-    var getGenreName2 = data.results[2].name;
-    console.log(getGenreName1);
-    $("#genre2").text(getGenreName1);
-    $("#genre3").text(getGenreName2);
 
-    var game1 = data.results[1].games[0].id;
-    console.log(game1);
-    $("#photo1").text(game1);
+    game1 = {
+      name: data.results[0].name,
+      photo: data.results[0].background_image,
+      genres: data.results[0].genres[0].name,
+      rating: data.results[0].rating_top,
+    };
 
-    genreResults.forEach((genre) => {
-      console.log(genre.name);
-      $("<button>")
-        .addClass("genreButton")
-        .text(genre.name)
-        .on("click", function (event) {
-          genreResults.forEach((genre) => {
-            if (event.target.textContent === genre.name) {
-              console.log(genre);
-            }
-          });
-        })
-        .appendTo($("body"));
-    });
-    $(document).click(
-      getGenreName1,
-      fetch(`https://api.rawg.io/api/games/${game1}?key=` + apiKey, {
-        method: "GET",
-      })
-        .then((response) => {
-          console.log(response);
-          return response.json();
-        })
-        .then(function (data) {
-          console.log(data);
-          var gameImage = data.background_image;
-          console.log(gameImage);
-          $("#photo1").attr("src", gameImage);
+    game2 = {
+      name: data.results[1].name,
+      photo: data.results[1].background_image,
+      genres: data.results[1].genres[0].name,
+      rating: data.results[1].rating_top,
+    };
+    game3 = {
+      name: data.results[2].name,
+      photo: data.results[2].background_image,
+      genres: data.results[2].genres[0].name,
+      rating: data.results[2].rating_top,
+    };
+    game4 = {
+      name: data.results[3].name,
+      photo: data.results[3].background_image,
+      genres: data.results[3].genres[0].name,
+      rating: data.results[3].rating_top,
+    };
+    game5 = {
+      name: data.results[4].name,
+      photo: data.results[4].background_image,
+      genres: data.results[4].genres[0].name,
+      rating: data.results[4].rating_top,
+    };
 
-          // for (var i = 0; i < data.results.length; i++) {
-          //   console.log(data.results[i].background_image);
-          // }
-        })
-        .catch((err) => {
-          console.error(err);
-        })
-    );
-  })
-  // .then(function (data) {
-  //   console.log(data);
-  //   var genreResults = data.results;
-  //   console.log(genreResults);
-  //   genreResults.forEach((genre) => {
-  //     console.log(genre.name);
-  //     $("<button>")
-  //       .addClass("genreButton")
-  //       .text(genre.name)
-  //       .on("click", function (event) {
-  //         genreResults.forEach((genre) => {
-  //           if (event.target.textContent === genre.name) {
-  //             console.log(genre);
-  //           }
-  //         });
-  //       })
-  //       .appendTo($("body"));
-  //   });
-  // })
-  .catch((err) => {
-    console.error(err);
+    $("#photo1").attr("src", game1.photo);
+    $("#photo2").attr("src", game2.photo);
+    $("#photo3").attr("src", game3.photo);
+    $("#photo4").attr("src", game4.photo);
+    $("#photo5").attr("src", game5.photo);
   });
-// document.addEventListener.selectedGenre1(
-//   "click",
-//   fetch("https://api.rawg.io/api/games?key=" + apiKey, {
-//     method: "GET",
-//   })
-//     .then((response) => {
-//       console.log(response);
-//       return response.json();
-//     })
-//     .then(function (data) {
-//       console.log(data);
-
-//       // for (var i = 0; i < data.results.length; i++) {
-//       //   console.log(data.results[i].background_image);
-//       // }
-//     })
-//     .catch((err) => {
-//       console.error(err);
-//     })
-// );
-
-// //Pictures
-// $(function () {
-//   $("#accordion").accordion();
-// });
