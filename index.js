@@ -15,7 +15,7 @@ fetch("https://api.rawg.io/api/games?key=" + apiKey, {
     console.log(data);
 
     game1 = {
-      name: data.results[i].name,
+      name: data.results[0].name,
       photo: data.results[0].background_image,
       genres: data.results[0].genres[0].name,
       rating: data.results[0].rating_top,
@@ -51,4 +51,10 @@ fetch("https://api.rawg.io/api/games?key=" + apiKey, {
     $("#photo3").attr("src", game3.photo);
     $("#photo4").attr("src", game4.photo);
     $("#photo5").attr("src", game5.photo);
+
+    $(".gameTitle1").text(game1.name);
+    $(".gameTitle2").text(game2.name);
+    $(".gameTitle3").text(game3.name);
+    $(".gameTitle4").text(game4.name);
+    $(".gameTitle5").text(game5.name);
   });
