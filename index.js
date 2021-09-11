@@ -2,27 +2,51 @@
 
 //API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
-
+var selectedGenre;
 //Fetch
 
-fetch("https://api.rawg.io/api/games?key=" + apiKey, {
-  method: "GET",
-})
-  .then((response) => {
-    console.log(response);
-    return response.json();
+// run the currently selected effect
+
+// get effect type from
+
+// call API
+function myFetch() {
+  var genre = $(".genre").val();
+
+  fetch("https://api.rawg.io/api/games?key=" + apiKey, {
+    method: "GET",
   })
-  .then(function (data) {
-    console.log(data);
+    .then((response) => {
+      console.log(response);
+      return response.json();
+    })
+    .then(function (data) {
+      var myArray = [];
+      console.log(data);
+      buildPage(data, genre);
+      data.results.forEach((result) => {
+        console.log(result);
+        result.genres.forEach((responseGenre) => {
+          console.log(responseGenre);
 
-    $("article").each(function (index) {
-      $(this).children("img").attr("src", data.results[index].background_image);
-      $(this).children("div").text(data.results[index].name);
+          if (genre === responseGenre.name) {
+            myArray.push(responseGenre);
+          }
+        });
+      });
+      console.log(myArray);
     });
+}
 
-    $("aside").each(function (index) {
-      $(this).children("div").text(data.results[index].name);
-
-      console.log(index);
-    });
+function buildPage(data, genre) {
+  $("article").each(function (index) {
+    $(this).children("img").attr("src", data.results[index].background_image);
+    $(this).children("aside").children("div").text(data.results[index].name);
   });
+}
+
+myFetch();
+
+$(".genre").on("change", myFetch($(".genre").val()));
+
+console.log($(".genre").val());
