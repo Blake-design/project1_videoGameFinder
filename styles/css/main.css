@@ -144,7 +144,3 @@ footer {
   text-align: center;
   color: var(--textcolor2);
 }
-#accordion {
-  height: 100%;
-  display: none;
-}

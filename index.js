@@ -8,18 +8,19 @@ $(function () {
   $("#accordion").accordion({
     collapsible: true,
   });
+  $("#accordion2").accordion({
+    collapsible: true,
+  });
+  $("#accordion3").accordion({
+    collapsible: true,
+  });
+  $("#accordion4").accordion({
+    collapsible: true,
+  });
+  $("#accordion5").accordion({
+    collapsible: true,
+  });
 });
-
-$(".pure-img").click(function () {
-  $("#accordion").css("display", "flex");
-});
-$("#accordion").dblclick(function () {
-  $(this).css("display", "none");
-});
-// $("#accordion").click(function showGameInfo() {
-//   // show the element
-//   $(this).css("display", "flex");
-// });
 
 // call API
 function myFetch() {
@@ -36,11 +37,9 @@ function myFetch() {
       var myArray = [];
       console.log(data);
       buildPage(data, genre);
-      console.log(genre);
+
       data.results.forEach((result) => {
-        console.log(result);
         result.genres.forEach((responseGenre) => {
-          console.log(responseGenre);
           $(".pure-button").click(function updateGames() {
             if (genre === responseGenre.name) {
               myArray.push(responseGenre);
@@ -48,12 +47,27 @@ function myFetch() {
           });
         });
       });
-      console.log(myArray);
     });
 }
 
 function buildPage(data, genre) {
   $("article").each(function (index) {
+    $(this)
+      .children("div")
+      .children("div")
+      .children("h4")
+      .text("ESRB Rating: " + data.results[index].esrb_rating.name);
+    $(this)
+      .children("div")
+      .children("div")
+      .children("h5")
+      .text("Metacritic Rating: " + data.results[index].metacritic);
+    $(this)
+      .children("div")
+      .children("div")
+      .children("h6")
+      .text("Insert data from second API HERE");
+    $(this).children("div").children("h3").text(data.results[index].name);
     $(this).children("img").attr("src", data.results[index].background_image);
     $(this).children("aside").children("div").text(data.results[index].name);
   });
