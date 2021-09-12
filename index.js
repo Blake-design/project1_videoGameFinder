@@ -4,10 +4,22 @@
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
 var selectedGenre;
 //Fetch
+$(function () {
+  $("#accordion").accordion({
+    collapsible: true,
+  });
+});
 
-// run the currently selected effect
-
-// get effect type from
+$(".pure-img").click(function () {
+  $("#accordion").css("display", "flex");
+});
+$("#accordion").dblclick(function () {
+  $(this).css("display", "none");
+});
+// $("#accordion").click(function showGameInfo() {
+//   // show the element
+//   $(this).css("display", "flex");
+// });
 
 // call API
 function myFetch() {
@@ -24,14 +36,16 @@ function myFetch() {
       var myArray = [];
       console.log(data);
       buildPage(data, genre);
+      console.log(genre);
       data.results.forEach((result) => {
         console.log(result);
         result.genres.forEach((responseGenre) => {
           console.log(responseGenre);
-
-          if (genre === responseGenre.name) {
-            myArray.push(responseGenre);
-          }
+          $(".pure-button").click(function updateGames() {
+            if (genre === responseGenre.name) {
+              myArray.push(responseGenre);
+            }
+          });
         });
       });
       console.log(myArray);
