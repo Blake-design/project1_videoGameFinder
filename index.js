@@ -1,9 +1,8 @@
-//Accordion Script(<script src="https://code.jquery.com/jquery-1.12.4.js"></script> <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>)
-
 //API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
-var selectedGenre;
-//Fetch
+
+// Accordian
+
 $(function () {
   $("#accordion").accordion({
     collapsible: true,
@@ -30,13 +29,13 @@ function myFetch() {
     method: "GET",
   })
     .then((response) => {
-      console.log(response);
       return response.json();
     })
     .then(function (data) {
       var myArray = [];
       console.log(data);
       buildPage(data, genre);
+      console.log(myArray);
 
       data.results.forEach((result) => {
         result.genres.forEach((responseGenre) => {
@@ -49,6 +48,8 @@ function myFetch() {
       });
     });
 }
+
+////this will build the page
 
 function buildPage(data, genre) {
   $("article").each(function (index) {
@@ -73,8 +74,8 @@ function buildPage(data, genre) {
   });
 }
 
-myFetch();
+$(".button").click(myFetch());
 
-$(".genre").on("change", myFetch($(".genre").val()));
+$(".genre").change($(".genre").val());
 
 console.log($(".genre").val());
