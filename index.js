@@ -104,10 +104,6 @@ function getDeals() {
       console.log(data);
 
       $("ul").each(function (i) {
-        if ($(this).children() === true) {
-          $(this).remove($("li"));
-        }
-
         var newGameTitle = $("<li></li>").text(data[i].title);
         var gameSalePrice = $("<p></p>")
           .text("Sale Price: " + data[i].salePrice)
@@ -125,3 +121,38 @@ $("#fetch-button").click(getDeals);
 $(".button").click(myFetch());
 
 $(".genre").change($(".genre").val());
+
+/////this below is for the side menu
+(function (window, document) {
+  // we fetch the elements each time because docusaurus removes the previous
+  // element references on page navigation
+  function getElements() {
+    return {
+      layout: document.getElementById("layout"),
+      menu: document.getElementById("menu"),
+      menuLink: document.getElementById("menuLink"),
+    };
+  }
+
+  function toggleAll() {
+    var active = "active";
+    var elements = getElements();
+
+    toggleClass(elements.layout, active);
+    toggleClass(elements.menu, active);
+    toggleClass(elements.menuLink, active);
+  }
+
+  function handleEvent(e) {
+    var elements = getElements();
+
+    if (e.target.id === elements.menuLink.id) {
+      toggleAll();
+      e.preventDefault();
+    } else if (elements.menu.className.indexOf("active") !== -1) {
+      toggleAll();
+    }
+  }
+
+  document.addEventListener("click", handleEvent);
+})(this, this.document);
