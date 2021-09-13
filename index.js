@@ -74,43 +74,54 @@ function buildPage(data, genre) {
   });
 }
 
-function getDeals() {
-  fetch("https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15", {
+$(".genre").change($(".genre").val());
+
+console.log($(".genre").val());
+
+//Game deals
+var requestOptions = {
   method: "GET",
   redirect: "follow",
-  })
-  .then((response) => {
-    return response.json()
-  })
-  .then (function (data) {
-    console.log(data);
-    
-    for (var i = 0; i < data.length; i++) {
-      // Creating elements, tablerow, tabledata, and anchor
-      var createTableRow = document.createElement('tr');
-      var tableData = document.createElement('td');
-      var link = document.createElement('a');
-  
-      // Setting the text of link and the href of the link
-      link.textContent = data[i].title;
-     
-  
-      // Appending the link to the tabledata and then appending the tabledata to the tablerow
-      // The tablerow then gets appended to the tablebody
-      tableData.appendChild(link);
-      createTableRow.appendChild(tableData);
-      tableBody.appendChild(createTableRow);
+};
+
+//Moduel 6.3
+
+var tableBody = document.getElementById("repo-table");
+var search = $("#searchValue").val();
+function getDeals() {
+  fetch(
+    "https://www.cheapshark.com/api/1.0/deals?storeID=1,2,11&upperPrice=15",
+
+    {
+      method: "GET",
+      redirect: "follow",
     }
-  });
+  )
+    .then((response) => {
+      return response.json();
+    })
+    .then(function (data) {
+      console.log(data);
 
+      $("ul").each(function (i) {
+        if ($(this).children() === true) {
+          $(this).remove($("li"));
+        }
 
+        var newGameTitle = $("<li></li>").text(data[i].title);
+        var gameSalePrice = $("<p></p>")
+          .text("Sale Price: " + data[i].salePrice)
+          .addClass("sale");
+        var gameNormalPrice = $("<p></p>")
+          .text("Normal Price: " + data[i].normalPrice)
+          .addClass("norm");
+        $(this).append(newGameTitle, gameSalePrice, gameNormalPrice);
+      });
+    });
+}
 
-
-
-
+$("#fetch-button").click(getDeals);
 
 $(".button").click(myFetch());
 
 $(".genre").change($(".genre").val());
-
-console.log($(".genre").val());
