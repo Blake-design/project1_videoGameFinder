@@ -74,6 +74,41 @@ function buildPage(data, genre) {
   });
 }
 
+function getDeals() {
+  fetch("https://www.cheapshark.com/api/1.0/deals?storeID=1&upperPrice=15", {
+  method: "GET",
+  redirect: "follow",
+  })
+  .then((response) => {
+    return response.json()
+  })
+  .then (function (data) {
+    console.log(data);
+    
+    for (var i = 0; i < data.length; i++) {
+      // Creating elements, tablerow, tabledata, and anchor
+      var createTableRow = document.createElement('tr');
+      var tableData = document.createElement('td');
+      var link = document.createElement('a');
+  
+      // Setting the text of link and the href of the link
+      link.textContent = data[i].title;
+     
+  
+      // Appending the link to the tabledata and then appending the tabledata to the tablerow
+      // The tablerow then gets appended to the tablebody
+      tableData.appendChild(link);
+      createTableRow.appendChild(tableData);
+      tableBody.appendChild(createTableRow);
+    }
+  });
+
+
+
+
+
+
+
 $(".button").click(myFetch());
 
 $(".genre").change($(".genre").val());
