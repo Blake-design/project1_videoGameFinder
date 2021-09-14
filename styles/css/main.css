@@ -16,12 +16,14 @@ body {
 nav {
   color: var(--textcolor);
 }
+
 .center {
-  padding: 10%;
+  padding: 20%;
 }
 
 .text-box {
   text-align: center;
+  border: 10px solid white;
 }
 
 .photo-box {
@@ -30,6 +32,29 @@ nav {
   height: 250px;
   text-align: center;
   color: var(--textcolor);
+}
+
+.border-gradient {
+  border: 20px solid;
+  border-image-slice: 1;
+  border-image-source: linear-gradient(to left, var(--game), var(--finder));
+}
+
+#angle {
+  --angle: 0deg;
+  border-image: linear-gradient(var(--angle), var(--norm), var(--sale)) 1;
+  animation: 10s rotate linear infinite;
+}
+
+@keyframes rotate {
+  to {
+    --angle: 360deg;
+  }
+}
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
 }
 
 .photo-box img {
@@ -66,6 +91,7 @@ nav {
 .text-box-subhead {
   font-family: "STIX Two Math", serif;
   font-weight: normal;
+  font-size: 1em;
   letter-spacing: 0.1em;
   color: var(--textcolor);
   padding-left: 2%;
@@ -74,11 +100,12 @@ nav {
 .text-box-subhead span {
   font-family: monospace;
   font-weight: normal;
+  font-size: 2em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   padding-left: 2%;
   padding-right: 2%;
-  font-size: 1rem;
+
   color: var(--dangeroustext);
 }
 
