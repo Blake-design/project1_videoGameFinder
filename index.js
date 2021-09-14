@@ -127,10 +127,28 @@ $(".button").click(myFetch());
     };
   }
 
+  function toggleClass(element, className) {
+    var classes = element.className.split(/\s+/);
+    var length = classes.length;
+    var i = 0;
+
+    for (; i < length; i++) {
+      if (classes[i] === className) {
+        classes.splice(i, 1);
+        break;
+      }
+    }
+    // The className is not found
+    if (length === classes.length) {
+      classes.push(className);
+    }
+
+    element.className = classes.join(" ");
+  }
+
   function toggleAll() {
     var active = "active";
     var elements = getElements();
-    g;
 
     toggleClass(elements.layout, active);
     toggleClass(elements.menu, active);
@@ -150,7 +168,6 @@ $(".button").click(myFetch());
 
   document.addEventListener("click", handleEvent);
 })(this, this.document);
-
 $("#genre").on("change", function (event) {
   myFetch(event.target.value);
 });
