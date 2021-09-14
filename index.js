@@ -1,4 +1,3 @@
-//API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
 
 // Accordian
@@ -180,10 +179,6 @@ function handleFormSubmit(event) {
   event.preventDefault();
 
   var wishItem = $('input[name="wish"]').val();
-<<<<<<< HEAD
-  
-=======
->>>>>>> 9bf071a1d130a1815c114b79da104c5dadeee00d
 
   if (!wishItem) {
     console.log("No wish item filled out in form!");
@@ -194,26 +189,7 @@ function handleFormSubmit(event) {
 
   $('input[name="wish"]').val("");
 
-  
+  localStorage.setItem("wishItem", JSON.stringify(wishItem));
 }
-<<<<<<< HEAD
-wishListFormEl.on('submit', handleFormSubmit);
-
-//Local Storage
-function persistInput(input)
-{
-  var wish = "input-" + input.id;
-
-  var storedValue = localStorage.getItem(wish);
-
-  if (storedValue)
-      input.value = storedValue;
-
-  input.addEventListener('input', function ()
-  {
-      localStorage.setItem(wish, input.value);
-  });
-}
-=======
 wishListFormEl.on("submit", handleFormSubmit);
->>>>>>> 9bf071a1d130a1815c114b79da104c5dadeee00d
+
