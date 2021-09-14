@@ -86,7 +86,6 @@ var requestOptions = {
 
 //Moduel 6.3
 
-var tableBody = document.getElementById("repo-table");
 var search = $("#searchValue").val();
 function getDeals() {
   fetch(
