@@ -3,20 +3,9 @@ var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
 
 // Accordian
 
-$(function () {
-  $("#accordion").accordion({
-    collapsible: true,
-  });
-  $("#accordion2").accordion({
-    collapsible: true,
-  });
-  $("#accordion3").accordion({
-    collapsible: true,
-  });
-  $("#accordion4").accordion({
-    collapsible: true,
-  });
-  $("#accordion5").accordion({
+$(".accordion").each(function () {
+  $(this).accordion({
+    event: "mouseover",
     collapsible: true,
   });
 });
@@ -161,6 +150,7 @@ $(".button").click(myFetch());
 
   document.addEventListener("click", handleEvent);
 })(this, this.document);
+
 $("#genre").on("change", function (event) {
   myFetch(event.target.value);
 });
