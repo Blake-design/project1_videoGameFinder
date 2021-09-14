@@ -136,7 +136,7 @@ $(".genre").change($(".genre").val());
 
   function toggleAll() {
     var active = "active";
-    var elements = getElements();
+    var elements = getElements();g
 
     toggleClass(elements.layout, active);
     toggleClass(elements.menu, active);
@@ -241,3 +241,28 @@ $(".genre").change($(".genre").val());
 
 // // Calls init to retrieve data and render it to the page on load
 // init();
+
+
+
+
+//Wish list
+var wishListFormEl = $("#wishList");
+var wishListEl = $("#items");
+
+function handleFormSubmit(event) {
+  event.preventDefault();
+
+  var wishItem = $('input[name="wish"]').val();;
+
+  if (!wishItem){
+    console.log("No wish item filled out in form!");
+    return;
+  }
+
+  wishListEl.append("<li>" + wishItem + "<li>");
+
+  $('input[name="wish"]').val('');
+
+  localStorage.setItem("wishItem", JSON.stringify(wishItem));
+}
+wishListFormEl.on('submit', handleFormSubmit);
