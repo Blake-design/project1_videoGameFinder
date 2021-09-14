@@ -86,6 +86,7 @@ var requestOptions = {
 
 //Moduel 6.3
 
+var tableBody = document.getElementById("repo-table");
 var search = $("#searchValue").val();
 function getDeals() {
   fetch(
@@ -251,7 +252,8 @@ var wishListEl = $("#items");
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  var wishItem = $('input[name="wish"]').val();;
+  var wishItem = $('input[name="wish"]').val();
+  
 
   if (!wishItem){
     console.log("No wish item filled out in form!");
@@ -262,6 +264,22 @@ function handleFormSubmit(event) {
 
   $('input[name="wish"]').val('');
 
-  localStorage.setItem("wishItem", JSON.stringify(wishItem));
+  
 }
 wishListFormEl.on('submit', handleFormSubmit);
+
+//Local Storage
+function persistInput(input)
+{
+  var wish = "input-" + input.id;
+
+  var storedValue = localStorage.getItem(wish);
+
+  if (storedValue)
+      input.value = storedValue;
+
+  input.addEventListener('input', function ()
+  {
+      localStorage.setItem(wish, input.value);
+  });
+}
