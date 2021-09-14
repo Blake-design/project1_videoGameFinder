@@ -1,4 +1,3 @@
-//API key
 var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
 
 // Accordian
@@ -173,23 +172,107 @@ $("#genre").on("change", function (event) {
 });
 
 //Wish list
-var wishListFormEl = $("#wishList");
-var wishListEl = $("#items");
+// var wishListFormEl = $("#wishList");
+// var wishListEl = $("#items");
 
-function handleFormSubmit(event) {
+// function handleFormSubmit(event) {
+//   event.preventDefault();
+
+//   var wishItem = $('input[name="wish"]').val();
+
+//   if (!wishItem) {
+//     console.log("No wish item filled out in form!");
+//     return;
+//   }
+
+//   wishListEl.append("<li>" + wishItem + "<li>");
+
+//   $('input[name="wish"]').val("");
+
+//   localStorage.setItem("wishItem", JSON.stringify(wishItem));
+// }
+// wishListFormEl.on("submit", handleFormSubmit);
+
+var wishesInput = document.querySelector("#wish");
+var wishesForm = document.querySelector("#wishList");
+var wishesList = document.querySelector("#items");
+
+
+var wishes = [];
+
+
+function renderWishes() {
+  // Clear todoList element and update todoCountSpan
+  wishesList.innerHTML = "";
+ 
+
+  // Render a new li for each todo
+  for (var i = 0; i < wishes.length; i++) {
+    var wish = wishes[i];
+
+    var li = document.createElement("li");
+    li.textContent = wish;
+    li.setAttribute("data-index", i);
+
+    var button = document.createElement("button");
+    button.textContent = "✘";
+
+    li.appendChild(button);
+    wishesList.appendChild(li);
+  }
+}
+
+function init() {
+
+  var storedWishes = JSON.parse(localStorage.getItem("wishes"));
+
+  
+  if (storedWishes !== null) {
+    wishes = storedWishes;
+  }
+
+
+  renderWishes();
+}
+
+function storeWishes() {
+  
+  localStorage.setItem("wishes", JSON.stringify(wishes));
+}
+
+
+wishesForm.addEventListener("submit", function(event) {
   event.preventDefault();
 
-  var wishItem = $('input[name="wish"]').val();
+  var wishText = wishesInput.value.trim();
 
-  if (!wishItem) {
-    console.log("No wish item filled out in form!");
+  
+  if (wishText === "") {
     return;
   }
 
-  wishListEl.append("<li>" + wishItem + "<li>");
+  
+  wishes.push(wishText);
+  wishesInput.value = "";
 
-  $('input[name="wish"]').val("");
+  
+  storeWishes();
+  renderWishes();
+});
 
-  localStorage.setItem("wishItem", JSON.stringify(wishItem));
-}
-wishListFormEl.on("submit", handleFormSubmit);
+wishesList.addEventListener("click", function(event) {
+  var element = event.target;
+
+  // Checks if element is a button
+  if (element.matches("button") === true) {
+    // Get its data-index value and remove the todo element from the list
+    var index = element.parentElement.getAttribute("data-index");
+    wishes.splice(index, 1);
+
+    // Store updated todos in localStorage, re-render the list
+    storeWishes();
+    renderWishes();
+  }
+});
+
+init()
