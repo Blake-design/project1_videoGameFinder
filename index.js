@@ -3,20 +3,9 @@ var apiKey = "c4ce918cf9734c35b52566ea7f18c95f";
 
 // Accordian
 
-$(function () {
-  $("#accordion").accordion({
-    collapsible: true,
-  });
-  $("#accordion2").accordion({
-    collapsible: true,
-  });
-  $("#accordion3").accordion({
-    collapsible: true,
-  });
-  $("#accordion4").accordion({
-    collapsible: true,
-  });
-  $("#accordion5").accordion({
+$(".accordion").each(function () {
+  $(this).accordion({
+    event: "mouseover",
     collapsible: true,
   });
 });
@@ -135,7 +124,8 @@ $(".genre").change($(".genre").val());
 
   function toggleAll() {
     var active = "active";
-    var elements = getElements();g
+    var elements = getElements();
+    g;
 
     toggleClass(elements.layout, active);
     toggleClass(elements.menu, active);
@@ -156,94 +146,6 @@ $(".genre").change($(".genre").val());
   document.addEventListener("click", handleEvent);
 })(this, this.document);
 
-// ////// add to wish list
-
-// var items = $("#items");
-
-// var wishes = [];
-
-// // The following function renders items in a todo list as <li> elements
-// function renderWishes() {
-//   // Clear todoList element and update todoCountSpan
-//   $("#wishList").html("")
-//   $("#gameCount").text(wishes.length);
-
-//   // Render a new li for each todo
-//   for (var i = 0; i < wishes.length; i++) {
-//     var wish = wishes[i];
-
-//     var li = $("<li></li>").text(wish);
-
-//     li.setAttribute("data-index", i);
-
-//     var button = document.createElement("button");
-//     button.textContent = "Complete ✔️";
-
-//     li.appendChild(button);
-//     todoList.appendChild(li);
-//   }
-// }
-
-// function init() {
-//   // Get stored games from localStorage
-//   var storedWishes = JSON.parse(localStorage.getItem("wish"));
-
-//   // If todos were retrieved from localStorage, update the todos array to it
-//   if ($("#wish") !== null) {
-//     wish = $("#wish");
-//   }
-
-//   renderWishes();
-// }
-
-// function storeWishes() {
-//   // Stringify and set key in localStorage to todos array
-//   localStorage.setItem("wish", JSON.stringify(wish));
-// }
-
-// // Add submit event to form
-
-// $("wish").submit(function (e) {
-//   e.preventDefault();
-
-//   var wishText = wish.value().trim();
-
-//   // Return from function early if submitted todoText is blank
-//   if (wishText === "") {
-//     return;
-//   }
-
-//   // Add new todoText to todos array, clear the input
-//   wish.push(wishText);
-//   wish.val("");
-
-//   // Store updated todos in localStorage, re-render the list
-//   storeWishes();
-//   renderWishes();
-// });
-
-// // Add click event to todoList element
-// todoList.addEventListener("click", function (event) {
-//   var element = event.target;
-
-//   // Checks if element is a button
-//   if (element.matches("button") === true) {
-//     // Get its data-index value and remove the todo element from the list
-//     var index = element.parentElement.getAttribute("data-index");
-//     todos.splice(index, 1);
-
-//     // Store updated todos in localStorage, re-render the list
-//     storeTodos();
-//     renderTodos();
-//   }
-// });
-
-// // Calls init to retrieve data and render it to the page on load
-// init();
-
-
-
-
 //Wish list
 var wishListFormEl = $("#wishList");
 var wishListEl = $("#items");
@@ -251,17 +153,17 @@ var wishListEl = $("#items");
 function handleFormSubmit(event) {
   event.preventDefault();
 
-  var wishItem = $('input[name="wish"]').val();;
+  var wishItem = $('input[name="wish"]').val();
 
-  if (!wishItem){
+  if (!wishItem) {
     console.log("No wish item filled out in form!");
     return;
   }
 
   wishListEl.append("<li>" + wishItem + "<li>");
 
-  $('input[name="wish"]').val('');
+  $('input[name="wish"]').val("");
 
   localStorage.setItem("wishItem", JSON.stringify(wishItem));
 }
-wishListFormEl.on('submit', handleFormSubmit);
+wishListFormEl.on("submit", handleFormSubmit);
