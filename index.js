@@ -32,7 +32,6 @@ function myFetch(change) {
           console.log(responseGenre);
           console.log(selectedGenre);
           if (selectedGenre === responseGenre.name) {
-            console.log("it worked");
             videoGameArray.push(result);
           }
         });
@@ -84,7 +83,7 @@ var tableBody = document.getElementById("repo-table");
 var search = $("#searchValue").val();
 function getDeals() {
   fetch(
-    "https://www.cheapshark.com/api/1.0/deals?storeID=1,2,11&upperPrice=15",
+    `https://www.cheapshark.com/api/1.0/deals?storeID=1,2,11&upperPrice=15`,
 
     {
       method: "GET",
@@ -99,6 +98,7 @@ function getDeals() {
 
       $("ul").each(function (i) {
         var newGameTitle = $("<li></li>").text(data[i].title);
+
         var gameSalePrice = $("<p></p>")
           .text("Sale Price: " + data[i].salePrice)
           .addClass("sale");
@@ -110,7 +110,7 @@ function getDeals() {
     });
 }
 
-$("#fetch-button").click(getDeals);
+getDeals();
 
 $(".button").click(myFetch());
 
@@ -171,40 +171,15 @@ $("#genre").on("change", function (event) {
   myFetch(event.target.value);
 });
 
-//Wish list
-// var wishListFormEl = $("#wishList");
-// var wishListEl = $("#items");
-
-// function handleFormSubmit(event) {
-//   event.preventDefault();
-
-//   var wishItem = $('input[name="wish"]').val();
-
-//   if (!wishItem) {
-//     console.log("No wish item filled out in form!");
-//     return;
-//   }
-
-//   wishListEl.append("<li>" + wishItem + "<li>");
-
-//   $('input[name="wish"]').val("");
-
-//   localStorage.setItem("wishItem", JSON.stringify(wishItem));
-// }
-// wishListFormEl.on("submit", handleFormSubmit);
-
 var wishesInput = document.querySelector("#wish");
 var wishesForm = document.querySelector("#wishList");
 var wishesList = document.querySelector("#items");
 
-
 var wishes = [];
-
 
 function renderWishes() {
   // Clear todoList element and update todoCountSpan
   wishesList.innerHTML = "";
- 
 
   // Render a new li for each todo
   for (var i = 0; i < wishes.length; i++) {
@@ -212,6 +187,8 @@ function renderWishes() {
 
     var li = document.createElement("li");
     li.textContent = wish;
+    li.style.marginTop = "1.5rem";
+    li.style.fontSize = "1.5rem";
     li.setAttribute("data-index", i);
 
     var button = document.createElement("button");
@@ -223,44 +200,36 @@ function renderWishes() {
 }
 
 function init() {
-
   var storedWishes = JSON.parse(localStorage.getItem("wishes"));
 
-  
   if (storedWishes !== null) {
     wishes = storedWishes;
   }
-
 
   renderWishes();
 }
 
 function storeWishes() {
-  
   localStorage.setItem("wishes", JSON.stringify(wishes));
 }
 
-
-wishesForm.addEventListener("submit", function(event) {
+wishesForm.addEventListener("submit", function (event) {
   event.preventDefault();
 
   var wishText = wishesInput.value.trim();
 
-  
   if (wishText === "") {
     return;
   }
 
-  
   wishes.push(wishText);
   wishesInput.value = "";
 
-  
   storeWishes();
   renderWishes();
 });
 
-wishesList.addEventListener("click", function(event) {
+wishesList.addEventListener("click", function (event) {
   var element = event.target;
 
   // Checks if element is a button
@@ -275,4 +244,4 @@ wishesList.addEventListener("click", function(event) {
   }
 });
 
-init()
+init();

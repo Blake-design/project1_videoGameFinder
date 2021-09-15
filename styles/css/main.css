@@ -51,11 +51,11 @@ nav {
     --angle: 360deg;
   }
 }
-@property --angle {
+/* @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
   inherits: false;
-}
+} */
 
 .photo-box img {
   max-width: 100%;
